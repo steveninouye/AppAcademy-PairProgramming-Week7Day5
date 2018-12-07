@@ -1,17 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { signup, login, logout } from "./util/session_api_util";
+import { Provider } from "react-redux";
+import { HashRouter } from "react-router-dom";
 import configureStore from "./store/store";
+import App from "./components/App";
+
+const Root = ({ store }) => (
+  <Provider store={store}>
+    <HashRouter>
+      <App />
+    </HashRouter>
+  </Provider>
+);
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root");
-
   const store = configureStore();
-  window.store = store;
-  // window.dispatch = dispatch;
-  window.login = login;
-  window.signup = signup;
-  window.logout = logout;
-
-  ReactDOM.render(<h1>react is working now!</h1>, root);
+  ReactDOM.render(<Root store={store} />, root);
 });
