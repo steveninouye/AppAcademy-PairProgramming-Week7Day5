@@ -7,11 +7,10 @@ import {
 const UsersReducer = (state = null, action) => {
   switch (action.type) {
     case LOGIN_USER:
-      return action.user.id;
+    case SIGNUP_USER:
+      return Object.keys(action.user)[0];
     case LOGOUT_USER:
       return null;
-    case SIGNUP_USER:
-      return action.user.id;
     default:
       return state;
   }

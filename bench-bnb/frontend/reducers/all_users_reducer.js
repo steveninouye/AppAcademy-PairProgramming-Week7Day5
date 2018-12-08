@@ -4,8 +4,7 @@ const allUsersReducer = (state = {}, action) => {
   switch (action.type) {
     case LOGIN_USER:
     case SIGNUP_USER:
-      let user = { [action.user.id]: action.user };
-      return Object.assign({}, state, user);
+      return Object.assign({}, state, action.user);
     default:
       return state;
   }
