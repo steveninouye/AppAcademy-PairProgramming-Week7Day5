@@ -17,8 +17,7 @@ ActiveRecord::Schema.define(version: 2018_12_10_175621) do
 
   create_table "benches", force: :cascade do |t|
     t.string "description"
-    t.string "[]"
-    t.string "lat"
+    t.float "lat"
     t.float "lng"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
