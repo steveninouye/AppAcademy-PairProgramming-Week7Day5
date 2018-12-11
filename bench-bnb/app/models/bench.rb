@@ -12,5 +12,11 @@
 #
 
 class Bench < ApplicationRecord
-   
+   def in_bounds?(bounds)
+      ne_lng = bounds[:northEast][:lng]
+      sw_lng = bounds[:southWest][:lng]
+      ne_lat = bounds[:northEast][:lat]
+      sw_lat = bounds[:southWest][:lat]
+      lng <= sw_lng && lng >= ne_lng && lat <= ne_lat && lat >= sw_lat
+   end
 end
