@@ -1,17 +1,10 @@
 class Api::BenchesController < ApplicationController
   def index
-
-    # coords = {
-    #   ne_lng: params[:bounds][:northEast][:lng], 
-    #   sw_lng: params[:bounds][:southWest][:lng], 
-    #   ne_lat: params[:bounds][:northEast][:lat], 
-    #   sw_lat: params[:bounds][:southWest][:lat]
-    # }
-
-    # query = "lng <= :sw_lng AND lng >= :ne_lng AND lat <= :ne_lat AND lat >= :sw_lat"
-
-    # @benches = Bench.where(query, coords)
-    @benches = Bench.all
+    if params[:bounds]
+      @benches = Bench.in_bounds(params[:bounds])
+    else
+      @benches = Bench.all
+    end
     render :index
   end
 

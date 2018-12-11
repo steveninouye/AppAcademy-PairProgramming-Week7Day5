@@ -12,11 +12,15 @@
 #
 
 class Bench < ApplicationRecord
-   def in_bounds?(bounds)
-      ne_lng = bounds[:northEast][:lng]
-      sw_lng = bounds[:southWest][:lng]
-      ne_lat = bounds[:northEast][:lat]
-      sw_lat = bounds[:southWest][:lat]
-      lng <= sw_lng && lng >= ne_lng && lat <= ne_lat && lat >= sw_lat
+   def self.in_bounds(bounds)
+      coords = {
+        ne_lng: bounds[:northEast][:lng], 
+        sw_lng: bounds[:southWest][:lng], 
+        ne_lat: bounds[:northEast][:lat], 
+        sw_lat: bounds[:southWest][:lat]
+      }
+      query = "lng >= :sw_lng AND lng <= :ne_lng AND lat <= :ne_lat AND lat >= :sw_lat"
+
+      self.where(query, coords)
    end
 end
